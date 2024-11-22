@@ -4,16 +4,8 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <SFML/Graphics.hpp>
-#include <windows.h>
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
 #include "../include/tcpserver.h"
-#include "../include/passchecker.h"
-
+//#include "../include/passchecker.h"
 //NO VC++ only clear C++
 // Need to link with Ws2_32.lib
 //IF U USE VC++ compiler
@@ -38,16 +30,19 @@ int main(void)
                 WSAGetLastError());
     }*/
 
-    Passchecker passchecker;
+    //Passchecker passchecker;
 
     std::string serverIP = "127.0.0.1";
 
     TCPServer server(serverIP, 54010);
 
     //Debug
-    passchecker.userRegister("Meepo", "123456");
-    passchecker.isNewUser("Meepo");
+    //passchecker.userRegister("Meepo", "123456");
+    //passchecker.isNewUser("Meepo");
+
+
     if (server.initWinsock()) {
         server.run();
     }
+    return 0;
 }

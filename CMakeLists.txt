@@ -19,20 +19,18 @@ FetchContent_MakeAvailable(SFML)
 add_executable(main src/main.cpp
     src/tcpserver.cpp
     include/tcpserver.h
-    include/passchecker.h
-    src/passchecker.cpp
-    include/sqlite3c.h
-    lib/sqlite3c.def lib/sqlite3c.dll lib/sqlite3c.exp lib/sqlite3c.lib
+    include/dbtxt.h src/dbtxt.cpp
+    include/pckg.h
 )
 
 
-add_library(sqlite3c src/sqlite3.c)
+#add_library(sqlite3c src/sqlite3.c)
 #set_target_properties(sqlite3c PROPERTIES
 #    IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/lib/sqlite3c.lib"
 #    LINK_FLAGS "/DEF:${CMAKE_SOURCE_DIR}/lib/sqlite3.def"
 #)
 
-target_link_libraries(main PRIVATE sfml-graphics wsock32 ws2_32 sqlite3c) #fwpuclnt ntdsapi
+target_link_libraries(main PRIVATE sfml-graphics wsock32 ws2_32) #fwpuclnt ntdsapi sqlite3c
 target_compile_features(main PRIVATE cxx_std_17)
 
 if(WIN32)
