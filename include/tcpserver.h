@@ -8,11 +8,6 @@
 
 #define MAX_BUFFER_SIZE (sizeof(msgpckg))
 
-class TCPServer;
-
-//Callback fct = fct with fct as parameter.
-typedef void(*MessageReceivedHandler)(TCPServer* listener, int socketID, std::string msg);
-
 class TCPServer {
 public:
     TCPServer();
