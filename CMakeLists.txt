@@ -10,12 +10,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
-include(FetchContent)
-FetchContent_Declare(SFML
-    GIT_REPOSITORY https://github.com/SFML/SFML.git
-    GIT_TAG 2.6.x)
-FetchContent_MakeAvailable(SFML)
-
 add_executable(main src/main.cpp
     src/tcpserver.cpp
     include/tcpserver.h
@@ -30,7 +24,7 @@ add_executable(main src/main.cpp
 #    LINK_FLAGS "/DEF:${CMAKE_SOURCE_DIR}/lib/sqlite3.def"
 #)
 
-target_link_libraries(main PRIVATE sfml-graphics wsock32 ws2_32) #fwpuclnt ntdsapi sqlite3c
+target_link_libraries(main PRIVATE wsock32 ws2_32) #fwpuclnt ntdsapi sqlite3c
 target_compile_features(main PRIVATE cxx_std_17)
 
 if(WIN32)

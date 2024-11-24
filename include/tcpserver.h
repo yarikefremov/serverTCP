@@ -18,8 +18,6 @@ public:
     TCPServer();
     TCPServer(std::string ipAddress, int port);
     ~TCPServer();
-
-    void sendMsg(int clientSocket, msgpckg msg);
     bool initWinsock();
     void run();
     void cleanupWinsock();
