@@ -197,29 +197,32 @@ void TCPServer::socketHandle(int socketCount){
             else {						//Send msg to other clients & not listening socket.
                 if(buf[0] == 0u){ //register or login
                     if((answerpacket.loginflag = buf[1]) == 0u){ //register
-                        answerpacket.ans = db.registerUser(std::string(buf[2], 33), std::string(buf[2+33], 33));
+                        answerpacket.ans = db.registerUser(std::string(buf+2), std::string(buf+2+33));
                         //send(outSock);
                         if(answerpacket.ans){
-                            socketmap[sock] = std::string(buf[2], 33);
-                            namemap[std::string(buf[2], 33)] = sock;
+                            socketmap[sock] = std::string(buf+2);
+                            namemap[std::string(buf+2)] = sock;
                         }
+                        std::cout<<"Socket "<<sock<<": "<<answerpacket.loginflag<<" "<<answerpacket.ans;
                         send(sock, (const char*)(&answerpacket), sizeof(answerpacket), 0);
                     }
                     else if(buf[1] == 1u){ //login
-                        answerpacket.ans = db.loginUser(std::string(buf[2], 33), std::string(buf[2+33], 33));
-                        if(namemap.find(std::string(buf[2], 33)) != 0){ //User is already connected
+                        answerpacket.ans = db.loginUser(std::string(buf+2), std::string(buf+2+33));
+                        if(namemap.find(std::string(buf+2)) != 0){ //User is already connected
                             answerpacket.ans = 0;
                         }
                         if(answerpacket.ans){
-                            socketmap[sock] = std::string(buf[2], 33);
-                            namemap[std::string(buf[2], 33)] = sock;
+                            socketmap[sock] = std::string(buf+2);
+                            namemap[std::string(buf+2)] = sock;
                         }
+                        std::cout<<"Socket "<<sock<<": "<<answerpacket.loginflag<<" "<<answerpacket.ans;
                         send(sock, (const char*)(&answerpacket), sizeof(answerpacket), 0);
                     }
 
                 }
                 else if(buf[0] == 1u){ //msgpckg
-                    send(namemap[std::string(buf[34], 33)], buf, sizeof(buf), 0);
+                    std::cout<<std::string(buf, sizeof(buf));
+                    send(namemap[std::string(buf+34)], buf, sizeof(buf), 0);
                     //for (int i = 0; i < master.fd_count; i++) {			//Loop through the sockets.
                     //    SOCKET outSock = master.fd_array[i];
 

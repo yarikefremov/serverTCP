@@ -6,7 +6,6 @@ struct authpckg{
     bool loginflag; //0 - register, 1 - login
     char username[33];
     char password[33];
-
 };
 
 struct msgpckg{
