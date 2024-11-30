@@ -7,8 +7,8 @@
 
 class DBTxt {
 private:
-    std::string filename;
-    std::unordered_map<std::string, std::string> users;
+  std::string m_filename;
+  std::unordered_map<std::string, std::string> m_users;
 
 public:
     ~DBTxt();
