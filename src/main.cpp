@@ -4,7 +4,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include "../include/tcpserver.h"
-//NO VC++ only clear C++
+
 // Need to link with Ws2_32.lib
 //IF U USE VC++ compiler
 //#pragma comment (lib, "Ws2_32.lib")

@@ -1,25 +1,41 @@
 #ifndef PCKG_H
 #define PCKG_H
 
-struct authpckg{
-    unsigned char flag = 0u;
-    bool loginflag; //0 - register, 1 - login
-    char username[33];
-    char password[33];
+// Размер полей пакетов
+#define NAME_LENGHT 33
+#define PASSWORD_LENGHT 33
+#define MSG_LENGHT 100
+
+// Значения флагов идентификации пакетов
+#define FLAG_AUTH_PACK 0u
+#define FLAG_MSG_PACK 1u
+#define FLAG_ACCEPT_FLAG 2u
+
+// Пакет для регистрации
+struct authpckg
+{
+  unsigned char flag = FLAG_AUTH_PACK;
+  bool loginflag; // 0 - register, 1 - login
+  char username[NAME_LENGHT];
+  char password[PASSWORD_LENGHT];
 };
 
-struct msgpckg{
-    unsigned char flag = 1u;
-    char srcname[33];
-    char dstname[33];
-    bool rsrv;
-    char msg[100];
+// Пакет для входящих и исходящих сообщений
+struct msgpckg
+{
+  unsigned char flag = FLAG_MSG_PACK;
+  char srcname[NAME_LENGHT];
+  char dstname[NAME_LENGHT];
+  bool rsrv;
+  char msg[MSG_LENGHT];
 };
 
-struct acceptpckg{
-    unsigned char flag = 2u;
-    bool loginflag; // 0 - register, 1 - login
-    bool ans; //0 - no, 1 - yes
+// Пакет для ответа сервера при регистрации
+struct acceptpckg
+{
+  unsigned char flag = FLAG_ACCEPT_FLAG;
+  bool loginflag; // 0 - register, 1 - login
+  bool ans;       // 0 - no, 1 - yes
 };
 
 #endif // PCKG_H
